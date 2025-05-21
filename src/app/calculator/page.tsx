@@ -15,15 +15,24 @@ export default function Home() {
         console.log("alarmRate:", Number(alarmRate));
         console.log("alarmRate:", isNaN(Number(alarmRate)));
 
-        // Checks if the input is empty
+        // Checks if the inputs are empty
         if (alarmRate === "" || percentageTime === "") {
             setError("Please enter values in both fields.");
             console.log("enter values");
             return;
-        } 
+        }
+
+        const alarmRateNum = Number(alarmRate.trim());
+        const percentageTimeNum = Number(percentageTime.trim());
+
+        // Checks if the inputs are numbers
+        if (isNaN(alarmRateNum) || isNaN(percentageTimeNum)) {
+            setError("Please enter valid numbers.");
+            return;
+        }
 
         // Validate inputs are in range
-        if ((Number(alarmRate) > 100 || Number(alarmRate) < 0) || (Number(percentageTime) > 50 || Number(percentageTime) < 0)) {
+        if ((alarmRateNum > 100 || alarmRateNum < 0) || (percentageTimeNum > 50 || percentageTimeNum < 0)) {
             setError("One or more inputs are out of range.");
             console.log("Out of range");
             return;
@@ -34,9 +43,6 @@ export default function Home() {
         console.log("number and not empty");
 
         // Determine the zone
-        const alarmRateNum = Number(alarmRate);
-        const percentageTimeNum = Number(percentageTime);
-
         if (alarmRateNum <= 1 && percentageTimeNum <= (-15 * alarmRateNum + 25)) {
             setZone("Robust");
         } else if ((alarmRateNum <= 1 && percentageTimeNum > (-15 * alarmRateNum + 25)) || (alarmRateNum > 1 && alarmRateNum <= 2 && percentageTimeNum <= (-25 * alarmRateNum + 75))) {
@@ -95,7 +101,7 @@ export default function Home() {
                 className="mb-4 max-w-[700px] w-full"
             />
 
-             {/* error message */}
+            {/* error message */}
             {error && (
                 <div role='alert' className="mt-4 text-red-600">
                     {error}
@@ -149,11 +155,9 @@ export default function Home() {
                 </div>
             </form>
             {/* zone */}
-            {zone && (
-                <div aria-live="polite" className="mt-4 text-lg font-semibold">
-                    Zone: <span className={zoneColor(zone)}>{zone}</span>
-                </div>
-            )}
+            <div aria-live="polite" className="mt-4 text-lg font-semibold">
+                Zone: <span className={zone ? zoneColor(zone) : "text-gray-400 italic"}>{zone || "Awaiting Input..."}</span>
+            </div>
         </div>
     )
 }
