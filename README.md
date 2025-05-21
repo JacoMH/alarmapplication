@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Project Structure
 
-- The main calculator functionality is implemented in `calculator/page.tsx`.
+- The main calculator functionality is implemented in `app/calculator/page.tsx`.
 - The `app/page.tsx` file serves as a landing page.
 
 ## Getting Started
