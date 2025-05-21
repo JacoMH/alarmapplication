@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Project Structure
+
+- The main calculator functionality is implemented in `calculator/page.tsx`.
+- The `app/page.tsx` file serves as an introductory or landing page.
+
 ## Getting Started
 
 First, run the development server:
